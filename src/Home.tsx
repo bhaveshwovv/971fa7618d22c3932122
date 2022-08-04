@@ -105,9 +105,14 @@ export const Home = () => {
   };
 
   /* istanbul ignore next*/
-  const renderParkingLots = ({item}: any) => {
+  const renderParkingLots = ({item, index}: any) => {
     return (
       <TouchableOpacity
+        testID={
+          item.isCheck
+            ? `parking-drawing-registered-${index}`
+            : `parking-drawing-space-${index}`
+        }
         disabled={item.carRegNo == ''}
         onPress={() => {
           generateBill(item), setSelectedParking(item), setShowModal(true);
@@ -123,7 +128,7 @@ export const Home = () => {
           alignItems: 'center',
           height: 100,
         }}>
-        <Text>{item.id}</Text>
+        <Text testID={`parking-drawing-space-number-${index}`}>{item.id}</Text>
         {item.carRegNo != '' && (
           <View>
             <Text>{item.carRegNo}</Text>
@@ -136,7 +141,11 @@ export const Home = () => {
   /* istanbul ignore next*/
   const renderModal = () => {
     return (
-      <Modal visible={showModal} transparent={true}>
+      <Modal
+        testID="	
+      deregister-car-registration"
+        visible={showModal}
+        transparent={true}>
         <View
           style={{
             flex: 1,
@@ -147,10 +156,11 @@ export const Home = () => {
           <Card style={{width: '80%', padding: '3%'}}>
             <View style={{marginHorizontal: 20}}>
               <Text>Car Registration Number: {selectedParking?.carRegNo}</Text>
-              <Text>
+              <Text
+                testID="deregister-time-spent">
                 Total Time Spent : {noOfHours === 0 ? '1' : noOfHours}
               </Text>
-              <Text>Total Bill : ${billAmount}</Text>
+              <Text testID="deregister-charge">Total Bill : ${billAmount}</Text>
             </View>
             <View
               style={{
@@ -159,9 +169,11 @@ export const Home = () => {
                 marginTop: 10,
               }}>
               <CButton
+                testID={'deregister-payment-button'}
                 title={'Payent Taken'}
                 onPress={() => takePayment()}></CButton>
               <CButton
+                testID={'deregister-back-button'}
                 title={'Close'}
                 onPress={() => setShowModal(false)}></CButton>
             </View>
@@ -174,16 +186,19 @@ export const Home = () => {
   return (
     <ScrollView style={{flex: 1, padding: '2%', paddingBottom: '5%'}}>
       <TextInput
+        testID="parking-create-text-input"
         placeholder="Enter No Of Lots"
         mode="outlined"
         value={noLots}
         onChangeText={(text) => /* istanbul ignore next*/ setNoLots(text)}
       />
       <CButton
+        testID="parking-create-submit-button"
         // isDisable={noLots.length === 0}
         title={'Create Parking Lots'}
         onPress={() => /* istanbul ignore next*/ createParking()}></CButton>
       <TextInput
+        testID="parking-drawing-registration-input"
         placeholder="Enter Car Reg No"
         mode="outlined"
         value={carRegNumber}
@@ -193,6 +208,7 @@ export const Home = () => {
         }
       />
       <CButton
+        testID="parking-drawing-add-car-button"
         title={'Submit'}
         onPress={
           /* istanbul ignore next*/ () =>
