@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1659619742026" clover="3.2.0">
+  <project timestamp="1659619742026" name="All files">
+    <metrics statements="15" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="3" elements="20" coveredelements="16" complexity="0" loc="15" ncloc="15" packages="2" files="3" classes="3"/>
+    <package name="parking">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="App.tsx" path="C:\Users\tcpladmin\Desktop\parking\App.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="parking.src">
+      <metrics statements="13" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
+      <file name="CButton.tsx" path="C:\Users\tcpladmin\Desktop\parking\src\CButton.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="9" type="stmt"/>
+      </file>
+      <file name="Home.tsx" path="C:\Users\tcpladmin\Desktop\parking\src\Home.tsx">
+        <metrics statements="11" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="174" count="2" type="stmt"/>
+        <line num="180" count="0" type="stmt"/>
+        <line num="185" count="0" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
