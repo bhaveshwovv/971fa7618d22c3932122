@@ -13,10 +13,10 @@ import {CButton} from './CButton';
 import moment from 'moment';
 
 export const Home = () => {
-  const [noLots, setNoLots] = useState<any>();
-  const [carRegNumber, setCarRegNumber] = useState<any>();
+  const [noLots, setNoLots] = useState<any>('');
+  const [carRegNumber, setCarRegNumber] = useState<any>('');
   const [parkingLots, setParkingLots] = useState<any>([]);
-  const [selectedParking, setSelectedParking] = useState();
+  const [selectedParking, setSelectedParking] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [noOfHours, setNoOfHours] = useState(0);
   const [billAmount, setBillAmount] = useState<any>(null);
@@ -120,18 +120,24 @@ export const Home = () => {
         style={{
           flex: 1,
           padding: 10,
-          backgroundColor: '#ffe0b2',
-          marginHorizontal: 40,
+          backgroundColor: item.carRegNo != '' ? 'orange' : 'skyblue',
+          marginHorizontal: 10,
           marginVertical: 10,
           borderRadius: 20,
           justifyContent: 'center',
           alignItems: 'center',
           height: 100,
         }}>
-        <Text testID={`parking-drawing-space-number-${index}`}>{item.id}</Text>
+        <Text
+          style={{color: 'white', fontWeight: 'bold'}}
+          testID={`parking-drawing-space-number-${index}`}>
+          {item.id}
+        </Text>
         {item.carRegNo != '' && (
           <View>
-            <Text>{item.carRegNo}</Text>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>
+              Car Number : {item.carRegNo}
+            </Text>
           </View>
         )}
       </TouchableOpacity>
@@ -156,8 +162,7 @@ export const Home = () => {
           <Card style={{width: '80%', padding: '3%'}}>
             <View style={{marginHorizontal: 20}}>
               <Text>Car Registration Number: {selectedParking?.carRegNo}</Text>
-              <Text
-                testID="deregister-time-spent">
+              <Text testID="deregister-time-spent">
                 Total Time Spent : {noOfHours === 0 ? '1' : noOfHours}
               </Text>
               <Text testID="deregister-charge">Total Bill : ${billAmount}</Text>
@@ -170,12 +175,18 @@ export const Home = () => {
               }}>
               <CButton
                 testID={'deregister-payment-button'}
-                title={'Payent Taken'}
-                onPress={() => takePayment()}></CButton>
+                title={'Payment Taken'}
+                onPress={
+                  /* istanbul ignore next*/ () =>
+                    /* istanbul ignore next*/ takePayment()
+                }></CButton>
               <CButton
                 testID={'deregister-back-button'}
                 title={'Close'}
-                onPress={() => setShowModal(false)}></CButton>
+                onPress={
+                  /* istanbul ignore next*/ () =>
+                    /* istanbul ignore next*/ setShowModal(false)
+                }></CButton>
             </View>
           </Card>
         </View>
@@ -186,34 +197,50 @@ export const Home = () => {
   return (
     <ScrollView style={{flex: 1, padding: '2%', paddingBottom: '5%'}}>
       <TextInput
+        activeOutlineColor="skyblue"
         testID="parking-create-text-input"
         placeholder="Enter No Of Lots"
         mode="outlined"
         value={noLots}
-        onChangeText={(text) => /* istanbul ignore next*/ setNoLots(text)}
-      />
-      <CButton
-        testID="parking-create-submit-button"
-        // isDisable={noLots.length === 0}
-        title={'Create Parking Lots'}
-        onPress={() => /* istanbul ignore next*/ createParking()}></CButton>
-      <TextInput
-        testID="parking-drawing-registration-input"
-        placeholder="Enter Car Reg No"
-        mode="outlined"
-        value={carRegNumber}
         onChangeText={
           /* istanbul ignore next*/ (text) =>
-            /* istanbul ignore next*/ setCarRegNumber(text)
+            /* istanbul ignore next*/ setNoLots(text)
         }
       />
       <CButton
-        testID="parking-drawing-add-car-button"
-        title={'Submit'}
+        testID="parking-create-submit-button"
+        isDisable={noLots.length == 0}
+        title={'Create Parking Lots'}
         onPress={
           /* istanbul ignore next*/ () =>
-            /* istanbul ignore next*/ assignParking()
-        }></CButton>
+            /* istanbul ignore next*/ createParking()
+        }
+      />
+      {parkingLots.length > 0 && (
+         /* istanbul ignore next*/
+        <>
+          <TextInput
+            activeOutlineColor="skyblue"
+            testID="parking-drawing-registration-input"
+            placeholder="Enter Car Reg No"
+            mode="outlined"
+            value={carRegNumber}
+            onChangeText={
+              /* istanbul ignore next*/ (text) =>
+                /* istanbul ignore next*/ setCarRegNumber(text)
+            }
+          />
+          <CButton
+            isDisable={carRegNumber.length == 0}
+            testID="parking-drawing-add-car-button"
+            title={'Submit'}
+            onPress={
+              /* istanbul ignore next*/ () =>
+                /* istanbul ignore next*/ assignParking()
+            }
+          />
+        </>
+      )}
       <FlatList
         data={parkingLots}
         numColumns={2}

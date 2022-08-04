@@ -6,11 +6,14 @@ export const CButton = (props: any) => {
   return (
     <Button
       style={{margin: '2%', alignSelf: 'center'}}
+      
       mode={'contained'}
       testID={props.testID}
+      color={"skyblue"}
       disabled={props.isDisable}
       onPress={props.onPress}>
-      <Text>{props.title}</Text>
+      
+      <Text style={{color:'white'}}>{props.title}</Text>
     </Button>
   );
 };
